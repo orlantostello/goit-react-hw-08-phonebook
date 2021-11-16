@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import s from './ContactForm.module.css';
 import { toast } from 'react-hot-toast';
 
 import { useCreateContactMutation, useFetchContactsQuery } from 'redux/contacts/contactsSlice';
+import Loader from 'react-loader-spinner';
 
 function ContactForm() {
   const [name, setName] = useState('');
@@ -12,7 +14,7 @@ function ContactForm() {
 
   const [contacts, setContacts] = useState([]);
 
-  const [createContact] = useCreateContactMutation();
+  const [createContact, { isLoading }] = useCreateContactMutation();
   const { data } = useFetchContactsQuery();
 
   useEffect(() => {
@@ -138,7 +140,10 @@ function ContactForm() {
       </label>
       <br />
 
-      <button className={s.btn} type="submit">
+      <button className={s.btn} type="submit" disabled={isLoading}>
+        {isLoading && (
+          <Loader className="Loader" type="ThreeDots" color="blue" height={15} width={15} />
+        )}
         Add contact
       </button>
     </form>

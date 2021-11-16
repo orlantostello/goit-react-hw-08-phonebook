@@ -6,6 +6,7 @@ import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { authOperations, authSelectors } from 'redux/auth';
 import { Toaster } from 'react-hot-toast';
+import Loader from 'react-loader-spinner';
 
 const HomeView = lazy(() => import('./views/HomeView'));
 const RegisterView = lazy(() => import('./views/RegisterView'));
@@ -28,7 +29,7 @@ export default function App() {
         <>
           <AppBar />
           <Switch>
-            <Suspense fallback={<p>Загружаем...</p>}>
+            <Suspense fallback={<Loader type="Oval" color="#00BFFF" height={32} width={32} />}>
               <PublicRoute exact path="/">
                 <HomeView />
               </PublicRoute>
