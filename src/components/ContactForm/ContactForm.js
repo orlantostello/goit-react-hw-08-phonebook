@@ -1,21 +1,28 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import s from './ContactForm.module.css';
-// import { connect } from 'react-redux';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux';
+import { toast } from 'react-hot-toast';
 
-// import contactsOperations from 'redux/contacts/contacts-operations';
-import { useCreateContactMutation } from 'redux/contacts/contactsSlice';
+import { useCreateContactMutation, useFetchContactsQuery } from 'redux/contacts/contactsSlice';
 
 function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  // const dispatch = useDispatch();
-  // const addContact = (name, number) => dispatch(contactsOperations.addContact(name, number));
+
+  const [contacts, setContacts] = useState([]);
 
   const [createContact] = useCreateContactMutation();
+  const { data } = useFetchContactsQuery();
+
+  useEffect(() => {
+    (async () => {
+      await data;
+      if (data) {
+        setContacts(data);
+      }
+    })();
+  }, [data]);
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -37,35 +44,58 @@ function ContactForm() {
   const nameInputId = shortid.generate();
   const numberInputId = shortid.generate();
 
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-
-  //   const contact = {
-  //     id: shortid.generate(),
-  //     name: name,
-  //     number: number,
-  //   };
-
-  //   addContact(contact);
-
-  //   reset();
-  // };
-
-  // const reset = () => {
-  //   setName('');
-  //   setNumber('');
-  // };
-
   const handleSubmit = async e => {
     e.preventDefault();
     const contact = {
-      // id: shortid.generate(),
       name: name,
-      phone: number,
+      number: number,
     };
-    // createContact(e.currentTarget.elements.content.value);
-    createContact(contact);
-    reset();
+
+    if (name === '') {
+      toast.error('The name cannot be empty!', {
+        duration: 3000,
+        style: {
+          color: '#fff',
+          backgroundColor: '#c40b0b',
+        },
+      });
+    }
+
+    if (number === '') {
+      toast.error('The number cannot be empty!', {
+        duration: 3000,
+        style: {
+          color: '#fff',
+          backgroundColor: '#c40b0b',
+        },
+      });
+    }
+
+    if (contacts.find(contact => name.toLowerCase() === contact.name.toLowerCase())) {
+      toast.error('Contact is already on the ', {
+        duration: 3000,
+        style: {
+          color: '#fff',
+          backgroundColor: '#c40b0b',
+        },
+      });
+      reset();
+      return;
+    }
+    if (name && number) {
+      createContact(contact);
+
+      reset();
+
+      toast.success('Contact added', {
+        duration: 3000,
+
+        style: {
+          color: '#fff',
+          backgroundColor: '#23dd23',
+        },
+      });
+    }
   };
 
   const reset = () => {

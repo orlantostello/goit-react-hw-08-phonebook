@@ -1,7 +1,8 @@
 .form {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  padding: 5px 20px;
+  width: 320px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
   display: flex;
   flex-direction: column;
   text-align: start;
@@ -9,13 +10,13 @@
 }
 
 .input {
-  height: 20px;
+  height: 10px;
   border-radius: 6px;
   padding-left: 10px;
   margin-bottom: 10px;
   cursor: pointer;
   width: 200px;
-  font-size: 18px;
+  font-size: 14px;
 }
 .input:focus,
 :hover {
@@ -26,7 +27,7 @@
 }
 .span {
   display: block;
-  font-size: 18px;
+  font-size: 14px;
   padding-top: 10px;
   padding-bottom: 5px;
 }
@@ -43,4 +44,20 @@
   background-color: #00ba0f;
   font-size: 15px;
   border-radius: 6px;
+}
+
+@media screen and (min-width: 720px) {
+  .form {
+    width: 600px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 5px 20px;
+  }
+  .input {
+    height: 20px;
+    font-size: 18px;
+  }
+  .span {
+    font-size: 18px;
+  }
 }

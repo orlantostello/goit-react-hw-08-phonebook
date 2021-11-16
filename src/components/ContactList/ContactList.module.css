@@ -1,11 +1,12 @@
 .list {
-  margin-left: 30px;
-  font-size: 20px;
+  margin-left: 10px;
+  font-size: 10px;
   text-align: start;
 }
 
 .item {
   display: flex;
+  width: 320px;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
@@ -21,13 +22,27 @@
 
 .btnList {
   cursor: pointer;
-  width: 60px;
+  width: 40px;
   border: none;
   color: white;
   padding: 5px 5px;
   text-align: center;
   text-decoration: none;
   background-color: #ca2f1b;
-  font-size: 14px;
+  font-size: 12px;
   border-radius: 6px;
+}
+
+@media screen and (min-width: 720px) {
+  .list {
+    margin-left: 20px;
+    font-size: 20px;
+  }
+  .item {
+    width: 480px;
+  }
+
+  .btnList {
+    width: 60px;
+  }
 }

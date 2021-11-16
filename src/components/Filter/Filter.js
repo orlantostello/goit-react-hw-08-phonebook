@@ -1,12 +1,10 @@
 import React from 'react';
 import s from './Filter.module.css';
 import shortid from 'shortid';
-// import { connect } from 'react-redux';
+
 import { useDispatch, useSelector } from 'react-redux';
-// import { contactsActions } from '../../redux/contacts/contacts-actions';
-// import contactsOperations from 'redux/contacts/contacts-operations';
+
 import { changeFilter, getFilter } from 'redux/contacts';
-// import { getVisibleContacts } from 'redux/contacts/contacts-selectors';
 
 const filterInputId = shortid.generate();
 
