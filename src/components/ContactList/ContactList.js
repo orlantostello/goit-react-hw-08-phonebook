@@ -1,29 +1,12 @@
-// import React from 'react';
-// import { useState, useEffect } from 'react';
-// import { useEffect } from 'react';
-// import { useDispatch } from 'react-redux';
-
 import { useSelector } from 'react-redux';
 import s from './ContactList.module.css';
 import { getFilter } from 'redux/contacts/contacts-selectors';
 import { useDeleteContactMutation, useFetchContactsQuery } from 'redux/contacts/contactsSlice';
-// import { authSelectors } from 'redux/auth';
+
 import Loader from 'react-loader-spinner';
 
 const ContactList = () => {
-  // const [contacts, setContacts] = useState([]);
-
   const { data: contacts, isFetching } = useFetchContactsQuery();
-
-  // useEffect(() => {
-  //   if (data) {
-  //     setContacts(data);
-  //   }
-  // }, [data]);
-
-  // const contacts = data => {
-  //   return data.slice().sort((a, b) => b.id - a.id);
-  // };
 
   const filter = useSelector(getFilter);
 
@@ -35,7 +18,6 @@ const ContactList = () => {
         contact.name.toLowerCase().includes(normalizedFilter) || contact.number.includes(filter),
     );
   };
-  // const { data: contacts, isFetching } = useFetchContactsQuery();
 
   const [deleteContact] = useDeleteContactMutation();
 
