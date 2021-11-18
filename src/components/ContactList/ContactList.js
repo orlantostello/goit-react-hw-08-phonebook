@@ -1,5 +1,5 @@
 // import React from 'react';
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 // import { useEffect } from 'react';
 // import { useDispatch } from 'react-redux';
 
@@ -11,18 +11,19 @@ import { useDeleteContactMutation, useFetchContactsQuery } from 'redux/contacts/
 import Loader from 'react-loader-spinner';
 
 const ContactList = () => {
-  const [contacts, setContacts] = useState([]);
+  // const [contacts, setContacts] = useState([]);
 
-  const { data, isFetching } = useFetchContactsQuery();
+  const { data: contacts, isFetching } = useFetchContactsQuery();
 
-  useEffect(() => {
-    (async () => {
-      await data;
-      if (data) {
-        setContacts(data);
-      }
-    })();
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     setContacts(data);
+  //   }
+  // }, [data]);
+
+  // const contacts = data => {
+  //   return data.slice().sort((a, b) => b.id - a.id);
+  // };
 
   const filter = useSelector(getFilter);
 
